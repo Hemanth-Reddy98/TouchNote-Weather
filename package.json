@@ -1,0 +1,25 @@
+{
+  "name": "touchnote-weather",
+  "version": "1.0.0",
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.",
+  "main": "index.js",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "memjs": "^1.2.2",
+    "prettier": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hemanth-Reddy98/TouchNote-Weather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hemanth-Reddy98/TouchNote-Weather/issues"
+  },
+  "homepage": "https://github.com/Hemanth-Reddy98/TouchNote-Weather#readme"
+}

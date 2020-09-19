@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-title> TouchNote Weather </mat-card-title>
+  <form #searchForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Search by typing city..."
+        required="true"
+        (input)="search($event)"
+        [matAutocomplete]="auto"
+        [(ngModel)]="input"
+        [ngModelOptions]="{standalone: true}"
+      />
+      <button mat-button *ngIf="input" matSuffix mat-icon-button aria-label="Clear" (click)="input=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let feature of features"
+      [value]="feature.place_name"
+      (click)="onSelect(feature)"
+    >
+      {{ feature.place_name }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-card>
+
+<mat-card *ngIf="result != null">
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-info-window [isOpen] = "true">
+        <div>   
+            <p style="font-size: 20px;">{{ result.place_name }}</p>
+            <p style="font-size: 25px;">{{ result.temp_avg }}°</p>
+            <p>{{ result.description }} ({{ result.chanceOfRain }}% of rain)</p>
+            <p>H: {{ result.temp_max }}° / L: {{ result.temp_min }}°</p>
+            <p>Humidity: {{ result.humidity }}%</p>
+        </div>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</mat-card>
+
