@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 import { Weather } from './weather.model';
 
 export interface MapBoxOutput {
@@ -21,13 +22,17 @@ export interface Coords {
 
 @Injectable({ providedIn: 'root' })
 export class ForecastService {
+  apiUrl: string;
+
   access_token =
     'pk.eyJ1IjoiaGVtYW50aDUyNDciLCJhIjoiY2tmNnc4NnZnMG1hdzJ5bzdnNTUxMThvMCJ9.ohD5qUgX_ArjkVsjebFnRA';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.API_URL;
+  }
 
   getResult(longitude: number, latitude: number) {
     const url =
-      'http://localhost:3000/result?lon=' + longitude + '&lat=' + latitude;
+      this.apiUrl + '/result?lon=' + longitude + '&lat=' + latitude;
     return this.http.get<{ complete: JSON; weather: Weather }>(url);
   }
 
