@@ -1,24 +1,28 @@
 const express = require("express");
-var Memcached = require("memcached");
+var memjs = require('memjs')
 const bodyParser = require("body-parser");
 const request = require("request");
+const dotenv = require('dotenv');
 const app = express();
-const apiKey = "0a0091d0e50f712f6d13756a1f069254";
 
-var memcached = new Memcached();
-memcached.connect("127.0.0.1:11211", function (err, conn) {
-  if (err) {
-    console.log(conn.server, "error while memcached connection!!");
-  } else {
-    console.log("Memcached connection successful!");
-  }
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.config({ path: '.env' });
+
+var memcached = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
+  failover: true,  // default: false
+  timeout: 1,      // default: 0.5 (seconds)
+  keepAlive: true  // default: false
 });
+
+const apiKey = process.env.WEATHER_API;
 
 /**
  * Express configuration.
  */
-app.set("host", process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
-app.set("port", process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000);
+app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
