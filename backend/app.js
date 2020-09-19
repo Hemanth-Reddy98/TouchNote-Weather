@@ -1,5 +1,5 @@
 const express = require("express");
-var memjs = require('memjs')
+const memcached = require("memcached");
 const bodyParser = require("body-parser");
 const request = require("request");
 const dotenv = require('dotenv');
@@ -11,10 +11,13 @@ const cors = require('cors');
  */
 dotenv.config({ path: '.env' });
 
-var memcached = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
-  failover: true,  // default: false
-  timeout: 1,      // default: 0.5 (seconds)
-  keepAlive: true  // default: false
+var mc = new memcached();
+mc.connect(process.env.MEMCACHIER_SERVERS, function (err, conn) {
+  if (err) {
+    console.log(conn.server, "error while memcached connection!!");
+  } else {
+    console.log("Memcached connection successful!");
+  }
 });
 
 const apiKey = process.env.WEATHER_API;
@@ -87,14 +90,14 @@ app.get("/result", (req, res) => {
   let lon = req.query.lon;
   if (lat) {
     let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-    memcached.get(url, function (err, val) {
+    mc.get(url, function (err, val) {
       if (err == null && val != null) {
         val.data = "cache";
         res.status(200).send(val);
       } else {
         requestresult(url, (result) => {
           // expiry time in seconds set to 10
-          memcached.set(url, result, 10, (err) => {
+          mc.set(url, result, 10, (err) => {
             if (err) console.log(err);
           });
           result.data = "api";
