@@ -12,6 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Make sure you have installed the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
+* Memcached - [Download & Install Memcached](http://downloads.northscale.com/memcached-win64-1.4.4-14.zip)
 
 ## Quick Install
 
@@ -42,6 +43,8 @@ Run `ng serve` for a angular. Navigate to `http://localhost:4200/`. The app will
 ```bash
 $ ng serve
 ```
+
+For memcached, extract the zip file for memcached and run memcached.exe
 
 That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
 If you encounter any problems, try the Troubleshooting section.
