@@ -1,5 +1,5 @@
 mat-card {
-  width: 70%;
+  width: 70vw;
   height: 100%;
   margin: 1rem auto;
 }
@@ -8,6 +8,8 @@ p {
   margin-block-end: 5px;
   margin-block-start: 5px;
   font-weight: normal;
+  padding: 4px;
+  font-size: 15px;
 }
 
 mat-form-field {
@@ -23,6 +25,10 @@ input {
 }
 
 agm-map {
-  height: 350px;
+  height: 100%;
   width: 100%;
+}
+
+.result {
+  height: 60vh;
 }

@@ -28,13 +28,13 @@
   </mat-autocomplete>
 </mat-card>
 
-<mat-card *ngIf="result != null">
+<mat-card *ngIf="result != null" class="result">
   <agm-map [latitude]="lat" [longitude]="lng">
     <agm-marker [latitude]="lat" [longitude]="lng">
       <agm-info-window [isOpen] = "true">
         <div>   
-            <p style="font-size: 20px;">{{ result.place_name }}</p>
-            <p style="font-size: 25px;">{{ result.temp_avg }}°</p>
+            <p style="font-size: 25px;">{{ result.place_name }}</p>
+            <p style="font-size: 30px;">{{ result.temp_avg }}°</p>
             <p>{{ result.description }} ({{ result.chanceOfRain }}% of rain)</p>
             <p>H: {{ result.temp_max }}° / L: {{ result.temp_min }}°</p>
             <p>Humidity: {{ result.humidity }}%</p>

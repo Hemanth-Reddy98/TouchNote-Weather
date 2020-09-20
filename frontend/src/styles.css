@@ -2,3 +2,7 @@
 
 html, body { height: 100%;background-color: lightskyblue; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.gm-style .gm-style-iw {
+    height: 50vh;
+    width: 25vw;
+  }
