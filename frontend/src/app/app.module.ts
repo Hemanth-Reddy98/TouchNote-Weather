@@ -38,7 +38,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDFvzbp-6Jz94Rkt3KBQVceUYcIR_GbmyU',
+      apiKey: '<GOOGLE_API_KEY>',
       libraries: ['places'],
     }),
   ],
