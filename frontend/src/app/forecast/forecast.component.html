@@ -9,11 +9,10 @@
         type="text"
         placeholder="Search by typing city..."
         required="true"
-        (input)="search($event)"
         [matAutocomplete]="auto"
-        (keyup.enter)="test($event)"
-        [(ngModel)]="input"
-        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)] = "input"
+        (input)="search($event)"
+        [ngModelOptions]="{standalone: true}"
       />
       <button
         mat-button
@@ -27,11 +26,10 @@
       </button>
     </mat-form-field>
   </form>
-  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="submit($event)"  [displayWith]="getOptionText">
     <mat-option
       *ngFor="let feature of features"
-      [value]="feature.place_name"
-      (click)="onSelect(feature)"
+      [value]="feature"
     >
       {{ feature.place_name }}
     </mat-option>

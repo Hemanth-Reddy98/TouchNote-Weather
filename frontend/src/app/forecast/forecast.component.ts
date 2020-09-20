@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Feature, ForecastService } from './forecast.service';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import { Weather } from './weather.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-forecast',
@@ -14,6 +16,8 @@ export class ForecastComponent {
   lng: number;
   searchPress: boolean = false;
   features: Feature[];
+  // inputControl: FormControl = new FormControl();
+
   @Output() onSelection: EventEmitter<any> = new EventEmitter<any>();
   constructor(public forecastService: ForecastService) {}
 
@@ -30,8 +34,8 @@ export class ForecastComponent {
     }
   }
 
-  test(event: any) {
-    console.log(event.target.value);
+  submit(event: MatAutocompleteSelectedEvent) {
+    this.onSelect(event.option.value);
   }
 
   onSelect(feature: Feature) {
@@ -45,5 +49,9 @@ export class ForecastComponent {
     this.lat = feature.center[1];
     this.lng = feature.center[0];
     this.features = [];
+  }
+
+  getOptionText(option) {
+    return option ? option.place_name : "";
   }
 }
