@@ -30,10 +30,6 @@ export class ForecastComponent {
     }
   }
 
-  test(event: any) {
-    console.log(event.target.value);
-  }
-
   onSelect(feature: Feature) {
     this.searchPress = true;
     this.result = null;
