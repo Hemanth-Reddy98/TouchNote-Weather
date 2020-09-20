@@ -4,18 +4,34 @@ mat-card {
   margin: 1rem auto;
 }
 
+mat-toolbar {
+  background-color: #000045;
+  color: white;
+}
+
+h1 {
+  margin: auto;
+}
+
 p {
-  margin-block-end: 5px;
-  margin-block-start: 5px;
+  margin-block-end: 4px;
+  margin-block-start: 4px;
   font-weight: normal;
   padding: 4px;
-  font-size: 15px;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-size: 14px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 mat-form-field {
   align-content: center;
   width: 70%;
-  padding: 1rem;
 }
 
 input {

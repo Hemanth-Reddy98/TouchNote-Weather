@@ -1,5 +1,7 @@
+<mat-toolbar>
+  <h1>TouchNote Weather</h1>
+</mat-toolbar>
 <mat-card>
-  <mat-card-title> TouchNote Weather </mat-card-title>
   <form #searchForm="ngForm">
     <mat-form-field>
       <input
@@ -9,15 +11,23 @@
         required="true"
         (input)="search($event)"
         [matAutocomplete]="auto"
+        (keyup.enter)="test($event)"
         [(ngModel)]="input"
-        [ngModelOptions]="{standalone: true}"
+        [ngModelOptions]="{ standalone: true }"
       />
-      <button mat-button *ngIf="input" matSuffix mat-icon-button aria-label="Clear" (click)="input=''">
+      <button
+        mat-button
+        *ngIf="input"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="input = ''"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
   </form>
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
     <mat-option
       *ngFor="let feature of features"
       [value]="feature.place_name"
@@ -27,20 +37,22 @@
     </mat-option>
   </mat-autocomplete>
 </mat-card>
+<div *ngIf="result == null && searchPress == true" class="centered">
+  <mat-spinner></mat-spinner>
+</div>
 
 <mat-card *ngIf="result != null" class="result">
   <agm-map [latitude]="lat" [longitude]="lng">
     <agm-marker [latitude]="lat" [longitude]="lng">
-      <agm-info-window [isOpen] = "true">
-        <div>   
-            <p style="font-size: 25px;">{{ result.place_name }}</p>
-            <p style="font-size: 30px;">{{ result.temp_avg }}°</p>
-            <p>{{ result.description }} ({{ result.chanceOfRain }}% of rain)</p>
-            <p>H: {{ result.temp_max }}° / L: {{ result.temp_min }}°</p>
-            <p>Humidity: {{ result.humidity }}%</p>
+      <agm-info-window [isOpen]="true">
+        <div>
+          <p style="font-size: 25px">{{ result.place_name }}</p>
+          <p style="font-size: 30px">{{ result.temp_avg }}°</p>
+          <p>{{ result.description }} ({{ result.chanceOfRain }}% of rain)</p>
+          <p>H: {{ result.temp_max }}° / L: {{ result.temp_min }}°</p>
+          <p>Humidity: {{ result.humidity }}%</p>
         </div>
       </agm-info-window>
     </agm-marker>
   </agm-map>
 </mat-card>
-

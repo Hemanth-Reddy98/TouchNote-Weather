@@ -12,6 +12,7 @@ export class ForecastComponent {
   input: string;
   lat: number;
   lng: number;
+  searchPress: boolean = false;
   features: Feature[];
   @Output() onSelection: EventEmitter<any> = new EventEmitter<any>();
   constructor(public forecastService: ForecastService) {}
@@ -29,7 +30,13 @@ export class ForecastComponent {
     }
   }
 
+  test(event: any) {
+    console.log(event.target.value);
+  }
+
   onSelect(feature: Feature) {
+    this.searchPress = true;
+    this.result = null;
     this.forecastService
       .getResult(feature.center[0], feature.center[1])
       .subscribe((data) => {
